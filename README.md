@@ -1,5 +1,5 @@
 # Analyzing Satellite Imagery via BigQuery SQL
-The goal of this demo is to run a BigQuery SQL and extract information from Google Earth Engine via Remote functions
+The goal of this demo is to run a BigQuery SQL and extract information from Google Earth Engine
 
 ## Requirements
 * Earth Engine access
