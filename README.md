@@ -7,3 +7,6 @@ The goal of this demo is to run a BigQuery SQL and extract information from Goog
 * An Earth Engine authorized service account
 
 ## Setting up the demo
+In Cloud Shell or other environment where you have the gcloud SDK installed, do:
+* gcloud components update
+* git clone https://github.com/dojowahi/earth-engine-on-bigquery.git
