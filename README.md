@@ -10,3 +10,7 @@ The goal of this demo is to run a BigQuery SQL and extract information from Goog
 In Cloud Shell or other environment where you have the gcloud SDK installed, do:
 * gcloud components update
 * git clone https://github.com/dojowahi/earth-engine-on-bigquery.git
+* cd earth-engine-on-bigquery
+* sh setup.sh
+
+If the shell script has executed successfully, you should now have a dataset gee under your project in BigQuery, along with a function get_ndvi_month
