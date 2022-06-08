@@ -24,7 +24,7 @@ If the shell script has executed successfully, you should now have a dataset gee
 <br/><br/>
 You will also see a sample query output with ndvi values on the Cloud shell, as shown below
 <br/><br/>
-![NDVI output](/img/ndvi_output.png)
+![NDVI output](/img/ndvi_cf_out.png)
 
 <br/><br/>
 ## Congrats! You just executed BigQuery SQL over Landsat imagery
