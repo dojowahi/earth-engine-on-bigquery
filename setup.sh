@@ -2,7 +2,7 @@
 
 project_id=$(gcloud config get-value project)
 cf_name="farmNDVIcf"
-ee_sa="earth-engine-343601@appspot.gserviceaccount.com"
+ee_sa="xxx-xxx-xxx@xxx.gserviceaccount.com"
 
 cd ~/earth-engine-on-bigquery/cloud-functions/ndvi
 
