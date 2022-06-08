@@ -20,6 +20,11 @@ Before executing setup.sh ensure the value of ee_sa in setup.sh reflects the nam
 sh setup.sh
 ```
 
-If the shell script has executed successfully, you should now have a dataset gee and table land_point under your project in BigQuery along with a function get_ndvi_month. You will also see a sample query output with ndvi values on the Cloud shell.
+If the shell script has executed successfully, you should now have a dataset gee and table land_point under your project in BigQuery along with a function get_ndvi_month. 
+<br/><br/>
+You will also see a sample query output with ndvi values on the Cloud shell, as shown below
+<br/><br/>
+![NDVI output](/img/ndvi_output.png)
 
+<br/><br/>
 ## Congrats! You just executed BigQuery SQL over Landsat imagery
