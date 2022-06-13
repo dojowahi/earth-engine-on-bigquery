@@ -19,15 +19,17 @@ def get_ndvi_month(request):
       replies = []
       calls = request_json['calls']
       for call in calls:
-        farm_lon = call[0]
-        farm_lat = call[1]
-        farm_name = call[2]
-        farm_year = call[3]
-        farm_mon = call[4]
-        
-        farm_poi = (farm_lon,farm_lat)
+        farm_json_poly = call[0]
+        farm_name = call[1]
+        farm_year = call[2]
+        farm_mon = call[3]
+        farm_poly = farm_json_poly["coordinates"]
 
-        ee_ndvi = farm_ndvi_calc(farm_poi,farm_year,farm_mon)
+        farm_aoi = ee.Geometry.Polygon(farm_poly)
+
+        print("Farm ",farm_name)
+
+        ee_ndvi = farm_ndvi_calc(farm_aoi,farm_year,farm_mon)
         ndvi = ee_ndvi.getInfo()
 
         replies.append({
@@ -35,14 +37,11 @@ def get_ndvi_month(request):
           'farm_ndvi': f'{ndvi}'
         })
       return json.dumps({
-        # each reply is a STRING (JSON not currently supported)
         'replies': [json.dumps(reply) for reply in replies]
       })
 
-def farm_ndvi_calc(farm_poi,year,month):
+def farm_ndvi_calc(farm_aoi,year,month):
   
-  startDate = '2020-01-01'
-  endDate = '2021-01-01'
   first_date = datetime(year, month, 1)
   startDate = first_date.strftime("%Y-%m-%d")
   last_date = datetime(year, month + 1, 1) + timedelta(days=-1)
@@ -51,9 +50,8 @@ def farm_ndvi_calc(farm_poi,year,month):
   filtered = landsat8.filter(ee.Filter.date(startDate, endDate))
   composite = ee.Algorithms.Landsat.simpleComposite(filtered)
   ndviImage = composite.normalizedDifference(['B5', 'B4']).rename('NDVI')
-  poi = ee.Geometry.Point(farm_poi)
   ndviValue = ndviImage.reduceRegion(**{
-    'geometry': poi,
+    'geometry': farm_aoi,
     'reducer': ee.Reducer.mean(),
     'scale': 30
   }).get('NDVI'); 
