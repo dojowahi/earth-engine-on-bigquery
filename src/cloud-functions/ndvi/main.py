@@ -3,6 +3,9 @@ import ee
 from datetime import date, datetime, timedelta
 import os
 import urllib.request
+import geojson
+import shapely
+from shapely import wkt
 
 
 def get_ndvi_month(request):
@@ -19,13 +22,14 @@ def get_ndvi_month(request):
       replies = []
       calls = request_json['calls']
       for call in calls:
-        farm_json_poly = call[0]
+
+        farm_json_str = call[0]
         farm_name = call[1]
         farm_year = call[2]
         farm_mon = call[3]
-        farm_poly = farm_json_poly["coordinates"]
-
-        farm_aoi = ee.Geometry.Polygon(farm_poly)
+        farm_json = shapely.wkt.loads(farm_json_str)
+        farm_poly = geojson.Feature(geometry=farm_json, properties={})
+        farm_aoi = ee.Geometry(farm_poly.geometry)
 
         print("Farm ",farm_name)
 
