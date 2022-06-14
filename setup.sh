@@ -33,7 +33,7 @@ endpoint=$(gcloud functions describe farmNDVI --region=us-central1 --format=json
 bq show gee || bq mk -d gee
 
     
-build_sql="CREATE OR REPLACE FUNCTION gee.get_ndvi_month(lon float64,lat float64, farm_name STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint}')"
+build_sql="CREATE OR REPLACE FUNCTION gee.get_ndvi_month(farm_aoi STRING, farm_name STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint}')"
 
     
 bq query --use_legacy_sql=false ${build_sql}
