@@ -42,9 +42,9 @@ bq query --use_legacy_sql=false ${build_sql}
 
 #bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=lon:FLOAT,lat:FLOAT,name:STRING ${project_id}:gee.land_coords  ./land_point.csv 
 
-#bq query --use_legacy_sql=false 'SELECT gee.get_ndvi_month(lon,lat,name,2020,7) as ndvi_jul FROM `earth-engine-343601.gee.land_coords` LIMIT 10'
+#bq query --use_legacy_sql=false 'SELECT gee.get_ndvi_month(lon,lat,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
 
 bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=farm_aoi:STRING,name:STRING ${project_id}:gee.land_coords  ./farm_dim.csv 
 
-bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `earth-engine-343601.gee.farm_dim` LIMIT 10'
+bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.farm_dim` LIMIT 10'
 
