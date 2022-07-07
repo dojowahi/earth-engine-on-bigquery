@@ -1,7 +1,7 @@
 # Cloud function setup for EE
 
 project_id=$(gcloud config get-value project)
-cf_ndvi="farmNDVIcf"
+cf_ndvi="polyNDVIcf"
 ee_sa="xxxxx-xxxxx@xxxxx.gserviceaccount.com"
 
 cd ~/earth-engine-on-bigquery/cloud-functions/ndvi
