@@ -1,10 +1,48 @@
+#!/bin/bash
+
+#####################################################################################################
+# Script Name: setup.sh
+# Date of Creation: 8/11/2022
+# Author: Ankur Wahi
+#####################################################################################################
+
+script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+display_usage()
+
+{
+
+ echo >&2
+ echo "Usage: Setup BQ remote functions to query Earth Engine " >&2
+ echo "Syntax: `basename $0` <GCP service account>" >&2
+ echo "Ex:  sh `basename $0`  ee-bq-remote@gee-demo-test.iam.gserviceaccount.com" >&2
+ echo >&2
+ exit 22
+
+}
+
+
+if [ $# -ne 1 ]
+then
+  echo "Error: Wrong number of parameters"
+  display_usage
+fi
+
+
 # Cloud function setup for EE
 
 project_id=$(gcloud config get-value project)
 cf_ndvi="polyNDVIcf"
-ee_sa="xxxxx-xxxxx@xxxxx.gserviceaccount.com"
+ee_sa=$1
 
-cd ~/earth-engine-on-bigquery/cloud-functions/ndvi
+cd ~/earth-engine-on-bigquery/src/cloud-functions/ndvi
+
+gcloud config set project ${project_id}
+gcloud services enable bigqueryconnection.googleapis.com
+gcloud services enable cloudfunctions.googleapis.com
+
+echo "Waiting for services to be enabled.."
+sleep 15
 
 #Create the external connection for BQ
 
@@ -16,7 +54,7 @@ bq mk --connection --display_name='my_gcf_ee_conn' \
 #Get serviceAccountID assocaited with the connection  
 
 serviceAccountId=`bq show --location=US --connection --format=json gcf-ee-conn| jq -r '.cloudResource.serviceAccountId'`
-
+echo "Service Account: ${serviceAccountId}"
 
 gcloud functions deploy ${cf_ndvi} --entry-point get_ndvi_month --runtime python39 --trigger-http --allow-unauthenticated --set-env-vars SERVICE_ACCOUNT=${ee_sa} --project ${project_id} --service-account ${ee_sa} --memory 2048MB
 
