@@ -7,7 +7,7 @@ The goal of this demo is to run a BigQuery SQL and extract information from Goog
 
 
 ## Setting up the demo
-In Cloud Shell or other environment where you have the gcloud SDK installed, do:
+In Cloud Shell or other environment where you have the gcloud SDK installed, execute the following commands:
 ```console
 gcloud components update 
 cd $HOME
