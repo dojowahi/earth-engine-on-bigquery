@@ -15,7 +15,11 @@ git clone https://github.com/dojowahi/earth-engine-on-bigquery.git
 cd earth-engine-on-bigquery 
 ```
 
-Before executing setup.sh ensure the value of ee_sa in setup.sh reflects the name of service account which has access to EE
+Edit the following files to reflect your environment:
+
+1) setup.sh -- Ensure the value of ee_sa in setup.sh reflects the name of service account which has access to EE
+2) eeKey.json -- The value in this file should contain the private you have generated for service account  which has access to EE
+
 ```console
 sh setup.sh
 ```
