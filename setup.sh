@@ -34,9 +34,9 @@ fi
 project_id=$(gcloud config get-value project)
 cf_ndvi="polyNDVIcf"
 ee_sa=$1
-
 cd ~/earth-engine-on-bigquery/src/cloud-functions/ndvi
 
+echo "Earth engine SA: ${ee_sa}"
 gcloud config set project ${project_id}
 gcloud services enable bigqueryconnection.googleapis.com
 gcloud services enable cloudfunctions.googleapis.com
