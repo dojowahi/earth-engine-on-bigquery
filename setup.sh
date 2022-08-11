@@ -62,7 +62,7 @@ gcloud functions deploy ${cf_ndvi} --entry-point get_ndvi_month --runtime python
 
 gcloud projects add-iam-policy-binding \
 $(gcloud config get-value project) \
---member='serviceAccount:${serviceAccountId} \
+--member='serviceAccount:'${serviceAccountId} \
 --role='roles/cloudfunctions.invoker'
 
 
