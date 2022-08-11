@@ -2,7 +2,7 @@
 The goal of this demo is to run a BigQuery SQL and extract information from Google Earth Engine
 
 ## Requirements
-* Earth Engine access to a service account --> [EE SA signup process](https://developers.google.com/earth-engine/guides/service_account). The service account created should have Service USage Admin, Earth Engine Resource Admin roles enabled
+* Earth Engine access to a service account --> [EE SA signup process](https://developers.google.com/earth-engine/guides/service_account). The service account created should have Service Usage Admin, Earth Engine Resource Admin roles enabled. After creating the service account, create a private key and store it in a secure location. The URL for the sign up process lists out all the steps in detail
 * A Google Cloud project with billing enabled, Cloud Functions, Earth Engine APIs enabled
 
 
