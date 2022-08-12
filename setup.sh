@@ -98,8 +98,8 @@ bq query --use_legacy_sql=false ${build_sql}
 
 cd ~/earth-engine-on-bigquery/src/data
 
-bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=farm_aoi:GEOGRAPHY,name:STRING ${project_id}:gee.land_coords  ./farm_dim.csv 
+bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=farm_aoi:STRING,name:STRING ${project_id}:gee.land_coords  ./farm_dim.csv 
 
 sleep 60
 
-bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(st_astext(farm_aoi),name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
+bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
