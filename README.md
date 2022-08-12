@@ -15,10 +15,15 @@ git clone https://github.com/dojowahi/earth-engine-on-bigquery.git
 cd earth-engine-on-bigquery 
 ```
 
-Edit the following files to reflect your environment:
+Edit the following file to reflect your environment:
 
-1) setup.sh -- Ensure the value of ee_sa in setup.sh reflects the name of service account which has access to EE
-2) eeKey.json -- The value in this file should contain the private you have generated for service account  which has access to EE
+1) eeKey.json -- This fole can be found under the cloud-functions directory, under each cloud function.The value in this file should contain the private you have generated for service account  which has access to EE. You can make change in one file and copy it to the other directories
+
+```console
+EDIT THE FILE FIRST
+cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
+cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
+```
 
 ```console
 sh setup.sh
