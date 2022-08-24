@@ -17,7 +17,7 @@ cd earth-engine-on-bigquery
 
 Edit the following file to reflect your environment:
 
-1) eeKey.json -- This fole can be found under the cloud-functions directory, under each cloud function.The value in this file should contain the private you have generated for service account  which has access to EE. You can make change in one file and copy it to the other directories
+1) eeKey.json -- This file can be found under the cloud-functions directory, under each cloud function.The value in this file should contain the private you have generated for service account  which has access to EE. You can make change in one file and copy it to the other directories
 
 ```console
 EDIT THE FILE FIRST
