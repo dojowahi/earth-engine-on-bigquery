@@ -12,16 +12,17 @@ In Cloud Shell or other environment where you have the gcloud SDK installed, exe
 gcloud components update 
 cd $HOME
 git clone https://github.com/dojowahi/earth-engine-on-bigquery.git
-cd earth-engine-on-bigquery 
+cd earth-engine-on-bigquery/src/cloud-functions/ndvi
 ```
 
 Edit the following file to reflect your environment:
 
-1) eeKey.json -- This file can be found under the cloud-functions directory, under each cloud function.The value in this file should contain the private you have generated for service account  which has access to EE. You can make change in one file and copy it to the other directories
+1) eeKey.json -- The value in this file should contain the private key you have generated for service account which has access to EE. You can make change in one file and copy it to the other directories
 
 ```console
 EDIT THE FILE FIRST
 cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
+
 cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
 ```
 
