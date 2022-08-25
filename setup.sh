@@ -4,6 +4,7 @@
 # Script Name: setup.sh
 # Date of Creation: 8/11/2022
 # Author: Ankur Wahi
+# Updated: 8/25/2022
 #####################################################################################################
 
 script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -28,13 +29,15 @@ then
   display_usage
 fi
 
+source ./config.sh
+gcloud config set project ${PROJECT_ID}
 
 # Cloud function setup for EE
 
-project_id=$(gcloud config get-value project)
+project_id=${PROJECT_ID}
 cf_ndvi="polyNDVIcf"
 cf_temp="polyTempcf"
-ee_sa=$1
+ee_sa=${SERVICE_ACCOUNT}
 cd ~/earth-engine-on-bigquery/src/cloud-functions/ndvi
 
 echo "Earth engine SA: ${ee_sa}"
