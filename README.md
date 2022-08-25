@@ -28,8 +28,8 @@ Edit the following file to reflect your environment:
 2) Now go back to folder earth-engine-on-bigquery
       ```console
           cd ~/earth-engine-on-bigquery
-      ```console
-In config.sh, edit values for PROJECT_ID and SERVICE_ACCOUNT
+      ```
+      In config.sh, edit values for PROJECT_ID and SERVICE_ACCOUNT
 
 Once the file has been edited, execute the command below
 
