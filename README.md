@@ -19,12 +19,19 @@ Edit the following file to reflect your environment:
 
 1) eeKey.json -- The value in this file should contain the private key you have generated for service account which has access to EE. You can make change in one file and copy it to the other directories
 
-```console
-EDIT THE FILE FIRST
-cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
+      ```console
+          EDIT THE FILE FIRST
+          cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
 
-cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
-```
+          cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
+      ```
+2) Now go back to folder earth-engine-on-bigquery
+      ```console
+          cd ~/earth-engine-on-bigquery
+      ```console
+In config.sh, edit values for PROJECT_ID and SERVICE_ACCOUNT
+
+Once the file has been edited, execute the command below
 
 ```console
 sh setup.sh
