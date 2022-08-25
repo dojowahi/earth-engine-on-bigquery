@@ -9,25 +9,6 @@
 
 script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-display_usage()
-
-{
-
- echo >&2
- echo "Usage: Setup BQ remote functions to query Earth Engine " >&2
- echo "Syntax: `basename $0` <GCP service account>" >&2
- echo "Ex:  sh `basename $0`  ee-bq-remote@gee-demo-test.iam.gserviceaccount.com" >&2
- echo >&2
- exit 22
-
-}
-
-
-if [ $# -ne 1 ]
-then
-  echo "Error: Wrong number of parameters"
-  display_usage
-fi
 
 source ./config.sh
 gcloud config set project ${PROJECT_ID}
