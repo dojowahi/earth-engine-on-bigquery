@@ -127,3 +127,4 @@ sleep 60
 
 #bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
 bq query --use_legacy_sql=false 'SELECT * from `gee.land_coords` LIMIT 10'
+echo " NOW sign up service account ${SERVICE_ACCOUNT} at https://signup.earthengine.google.com/#!/service_accounts "
