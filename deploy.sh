@@ -13,6 +13,36 @@ script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source ./config.sh
 gcloud config set project ${PROJECT_ID}
 
+##################################################
+##
+## Enable APIs
+##
+##################################################
+
+echo "enabling the necessary APIs"
+
+gcloud services enable compute.googleapis.com
+
+gcloud services enable storage.googleapis.com
+
+gcloud services enable bigquery.googleapis.com
+
+gcloud services enable appengine.googleapis.com
+
+gcloud services enable appengineflex.googleapis.com
+
+gcloud services enable appengineflex.googleapis.com
+
+gcloud services enable bigqueryconnection.googleapis.com
+
+gcloud services enable cloudfunctions.googleapis.com
+
+gcloud services enable earthengine.googleapis.com
+
+echo "Creating App Engine app" 
+
+gcloud app create --region=${APP_ENGINE_REGION}
+
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:${PROJECT_ID}@appspot.gserviceaccount.com \
     --role=roles/editor
