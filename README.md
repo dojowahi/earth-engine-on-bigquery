@@ -17,14 +17,7 @@ chmod +x *.sh
 
 **2)** **Edit config.sh** - In your editor of choice update the variables in config.sh to reflect your desired gcp project.
 
-**3)** Once the file has been edited, execute the command below
-
-```console
-sh setup.sh
-```
-On successful execution of setup.sh , you will have a new project created in your GCP env, with all the required APIs enabled
-
-**4)** Next execute the command below
+**3)** Next execute the command below
 
 ```console
 sh deploy.sh
@@ -36,9 +29,9 @@ You will also see a sample query output on the Cloud shell, as shown below
 <br/><br/>
 ![BQ output](/img/deploy.png)
 
-**5)** A Service Account(SA) in format **<Project_Id>@appspot.gserviceaccount.com** was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
+**4)** A Service Account(SA) in format **<Project_Id>@appspot.gserviceaccount.com** was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
 <br/><br/>
-**6)** Once signup is complete execute the command below in Cloudshell
+**5)** Once signup is complete execute the command below in Cloudshell
 ```console
 bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
 ```
