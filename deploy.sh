@@ -53,7 +53,7 @@ cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
 cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
 
 # Cloud function setup for EE
-
+SERVICE_ACCOUNT=${PROJECT_ID}@appspot.gserviceaccount.com 
 project_id=${PROJECT_ID}
 cf_ndvi="polyNDVIcf"
 cf_temp="polyTempcf"
