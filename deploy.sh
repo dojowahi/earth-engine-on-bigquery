@@ -32,8 +32,6 @@ cd ~/earth-engine-on-bigquery/src/cloud-functions/ndvi
 
 echo "Earth engine SA: ${ee_sa}"
 gcloud config set project ${project_id}
-gcloud services enable bigqueryconnection.googleapis.com
-gcloud services enable cloudfunctions.googleapis.com
 
 echo "Waiting for services to be enabled.."
 sleep 15
@@ -68,7 +66,7 @@ endpoint_ndvi=$(gcloud functions describe ${cf_ndvi} --region=us-central1 --form
 endpoint_temp=$(gcloud functions describe ${cf_temp} --region=us-central1 --format=json | jq -r '.httpsTrigger.url')
 
 
-bq show gee || bq mk -d gee
+bq mk -d gee
 
     
 # build_sql="CREATE OR REPLACE FUNCTION gee.get_ndvi_month(lon float64,lat float64, farm_name STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint}')"
