@@ -1,13 +1,38 @@
-# project id for your project
+##################################################
+##
+## Set these Variables
+##
+##################################################
+# existing GCP user that will:
+# create the project
+# attach a billing id (needs to have permission)
+# and provision resources
+export USER_EMAIL=<insert gcp user email>
+
+# project id for your NEW GCP project
 export PROJECT_ID=<insert project id>
 
-# Service Account which has access to GEE and a private key created, check prerequisites
-export SERVICE_ACCOUNT=<Service account ID>
+# the new project will need to be tied to a billing account
+export BILLING_ACCOUNT_ID=<insert billing account>
 
+# desired GCP region for networking and compute resources
+export REGION=<insert gcp region>
+
+# desired GCP zone for networking and compute resources
+export ZONE=<insert gcp zone>
+
+# desired App Engine region name
+# may be slightly different from GCP region above
+# run "gcloud app regions list" from an existing project to confirm
+export APP_ENGINE_REGION=<insert desired app engine region name>
 
 ##################################################
 #Example
 ##################################################
-# export PROJECT_ID=gee-demo-test
-# export SERVICE_ACCOUNT=ee-tester@gee-demo-test.iam.gserviceaccount.com
+# export USER_EMAIL=myuser@mydomain.com
+# export PROJECT_ID=gee-on-gcp
+# export BILLING_ACCOUNT_ID=123456-123456-123456
+# export REGION=us-central1
+# export ZONE=us-central1-a
+# export APP_ENGINE_REGION=us-central
 ##################################################
