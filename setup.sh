@@ -13,6 +13,15 @@ script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source ./config.sh
 gcloud config set project ${PROJECT_ID}
 
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member=serviceAccount:${PROJECT_ID}@appspot.gserviceaccount.com \
+    --role=roles/editor
+    
+gcloud iam service-accounts keys create ~/eeKey.json --iam-account ${PROJECT_ID}@appspot.gserviceaccount.com
+cd ~/
+cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
+cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
+
 # Cloud function setup for EE
 
 project_id=${PROJECT_ID}
@@ -86,4 +95,5 @@ bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=farm_
 
 sleep 60
 
-bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
+#bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
+bq query --use_legacy_sql=false 'SELECT * from `gee.land_coords` LIMIT 10'
