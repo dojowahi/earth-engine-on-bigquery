@@ -43,17 +43,19 @@ echo "Creating App Engine app"
 
 gcloud app create --region=${APP_ENGINE_REGION}
 
+SERVICE_ACCOUNT=${PROJECT_ID}@appspot.gserviceaccount.com 
+
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
-    --member=serviceAccount:${PROJECT_ID}@appspot.gserviceaccount.com \
+    --member=serviceAccount:${SERVICE_ACCOUNT} \
     --role=roles/editor
     
-gcloud iam service-accounts keys create ~/eeKey.json --iam-account ${PROJECT_ID}@appspot.gserviceaccount.com
+gcloud iam service-accounts keys create ~/eeKey.json --iam-account ${SERVICE_ACCOUNT}
 cd ~/
 cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
 cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
 
 # Cloud function setup for EE
-SERVICE_ACCOUNT=${PROJECT_ID}@appspot.gserviceaccount.com 
+
 project_id=${PROJECT_ID}
 cf_ndvi="polyNDVIcf"
 cf_temp="polyTempcf"
