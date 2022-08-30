@@ -3,7 +3,7 @@ The goal of this demo is to run a BigQuery SQL and extract information from Goog
 
 ## Requirements
 * Ensure your GCP user has access to Earth Engine. You can signup for Earth Engine at :- [Earth Engine Signup](https://signup.earthengine.google.com/)
-* * Ensure the GCP user is allowed to create service accounts and assign roles
+* Ensure the GCP user is allowed to create service accounts and assign roles
 
 
 ## Setting up the demo
