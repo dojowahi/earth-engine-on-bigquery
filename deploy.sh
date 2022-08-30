@@ -44,10 +44,14 @@ echo "Creating App Engine app"
 gcloud app create --region=${APP_ENGINE_REGION}
 
 SERVICE_ACCOUNT=${PROJECT_ID}@appspot.gserviceaccount.com 
-
+    
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:${SERVICE_ACCOUNT} \
-    --role=roles/editor
+    --role=roles/serviceusage.serviceUsageAdmin
+    
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member=serviceAccount:${SERVICE_ACCOUNT} \
+    --role=roles/earthengine.admin
     
 gcloud iam service-accounts keys create ~/eeKey.json --iam-account ${SERVICE_ACCOUNT}
 cd ~/
