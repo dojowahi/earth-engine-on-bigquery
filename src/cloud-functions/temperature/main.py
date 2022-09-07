@@ -5,19 +5,22 @@ import os
 import urllib.request
 import geojson
 import shapely
+from google.auth import compute_engine
 from shapely import wkt
-
-
 
 def get_temp_month(request):
 
-      url = "http://metadata.google.internal/computeMetadata/v1/project/project-id"
-      req = urllib.request.Request(url)
-      req.add_header("Metadata-Flavor", "Google")
-      project_id = urllib.request.urlopen(req).read().decode()
-      service_account = os.environ['SERVICE_ACCOUNT']
-      credentials = ee.ServiceAccountCredentials(service_account, 'eeKey.json')
-      ee.Initialize(credentials=credentials, project=project_id)
+#       url = "http://metadata.google.internal/computeMetadata/v1/project/project-id"
+#       req = urllib.request.Request(url)
+#       req.add_header("Metadata-Flavor", "Google")
+#       project_id = urllib.request.urlopen(req).read().decode()
+#       service_account = os.environ['SERVICE_ACCOUNT']
+#       credentials = ee.ServiceAccountCredentials(service_account, 'eeKey.json')
+#       ee.Initialize(credentials=credentials, project=project_id)
+
+      scopes = ["https://www.googleapis.com/auth/earthengine"]
+      credentials = compute_engine.Credentials(scopes=scopes)
+      ee.Initialize(credentials)
 
       request_json = request.get_json(silent=True)
       print('Req Json',type(request_json))
