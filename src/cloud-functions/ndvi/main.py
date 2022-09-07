@@ -8,7 +8,9 @@ import shapely
 from shapely import wkt
 
 
+
 def get_ndvi_month(request):
+
       url = "http://metadata.google.internal/computeMetadata/v1/project/project-id"
       req = urllib.request.Request(url)
       req.add_header("Metadata-Flavor", "Google")
@@ -16,7 +18,7 @@ def get_ndvi_month(request):
       service_account = os.environ['SERVICE_ACCOUNT']
       credentials = ee.ServiceAccountCredentials(service_account, 'eeKey.json')
       ee.Initialize(credentials=credentials, project=project_id)
-      
+
       request_json = request.get_json(silent=True)
       print('Req Json',type(request_json))
       replies = []
@@ -24,25 +26,20 @@ def get_ndvi_month(request):
       for call in calls:
 
         farm_json_str = call[0]
-        farm_name = call[1]
-        farm_year = call[2]
-        farm_mon = call[3]
+        #farm_name = call[1]
+        farm_year = call[1]
+        farm_mon = call[2]
         farm_json = shapely.wkt.loads(farm_json_str)
         farm_poly = geojson.Feature(geometry=farm_json, properties={})
         farm_aoi = ee.Geometry(farm_poly.geometry)
 
-        print("Farm ",farm_name)
+        #print("Farm ",farm_name)
 
         ee_ndvi = farm_ndvi_calc(farm_aoi,farm_year,farm_mon)
-        ndvi = ee_ndvi.getInfo()
+        #ndvi = ee_ndvi.getInfo()
 
-        replies.append({
-          'farm_name': f'{farm_name}',
-          'farm_ndvi': f'{ndvi}'
-        })
-      return json.dumps({
-        'replies': [json.dumps(reply) for reply in replies]
-      })
+        replies.append(ee_ndvi)
+      return json.dumps({'replies': [str(x) for x in ee.List(replies).getInfo()]})
 
 def farm_ndvi_calc(farm_aoi,year,month):
   
