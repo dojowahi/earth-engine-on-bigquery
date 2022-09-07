@@ -53,11 +53,11 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:${SERVICE_ACCOUNT} \
     --role=roles/earthengine.admin
     
-gcloud iam service-accounts keys create ~/eeKey.json --iam-account ${SERVICE_ACCOUNT}
-cd ~/
-cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/ndvi/
-cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
-cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
+# gcloud iam service-accounts keys create ~/eeKey.json --iam-account ${SERVICE_ACCOUNT}
+# cd ~/
+# cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/ndvi/
+# cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/temperature/
+# cp eeKey.json ~/earth-engine-on-bigquery/src/cloud-functions/crop/
 
 # Cloud function setup for EE
 
