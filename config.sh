@@ -21,7 +21,7 @@ export REGION=<insert gcp region>
 # desired App Engine region name
 # may be slightly different from GCP region above
 # run "gcloud app regions list" from an existing project to confirm
-export APP_ENGINE_REGION=<insert desired app engine region name>
+# export APP_ENGINE_REGION=<insert desired app engine region name>
 
 ##################################################
 #Example
