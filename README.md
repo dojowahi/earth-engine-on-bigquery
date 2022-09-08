@@ -30,7 +30,7 @@ You will also see a sample query output on the Cloud shell, as shown below
 <br/><br/>
 ![BQ output](/img/deploy.png)
 
-**4)** A Service Account(SA) in format **<Project_Id>@appspot.gserviceaccount.com** was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
+**4)** A Service Account(SA) in format **<Project_Number>-compute@developer.gserviceaccount.com** was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
 <br/><br/>
 **5)** Once signup is complete execute the command below in Cloudshell
 ```console
