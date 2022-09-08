@@ -108,12 +108,12 @@ bq mk -d gee
     
 # build_sql="CREATE OR REPLACE FUNCTION gee.get_ndvi_month(lon float64,lat float64, farm_name STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint}')"
 
-build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_ndvi_month(farm_aoi STRING, farm_name STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_ndvi}')"
+build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_ndvi_month(farm_aoi STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_ndvi}')"
 
     
 bq query --use_legacy_sql=false ${build_sql}
 
-build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_temp_month(farm_aoi STRING, farm_name STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_temp}')"
+build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_temp_month(farm_aoi STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_temp}')"
 
     
 bq query --use_legacy_sql=false ${build_sql}
@@ -130,7 +130,7 @@ bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=farm_
 
 sleep 60
 
-#bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,name,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
+#bq query --use_legacy_sql=false 'SELECT gee.get_poly_ndvi_month(farm_aoi,2020,7) as ndvi_jul FROM `gee.land_coords` LIMIT 10'
 bq query --use_legacy_sql=false 'SELECT * from `gee.land_coords` LIMIT 10'
 echo ""
 echo " NOW sign up service account ${SERVICE_ACCOUNT} at https://signup.earthengine.google.com/#!/service_accounts "
