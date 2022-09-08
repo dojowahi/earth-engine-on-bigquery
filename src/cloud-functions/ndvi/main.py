@@ -10,14 +10,6 @@ from shapely import wkt
 
 def get_ndvi_month(request):
 
-#       url = "http://metadata.google.internal/computeMetadata/v1/project/project-id"
-#       req = urllib.request.Request(url)
-#       req.add_header("Metadata-Flavor", "Google")
-#       project_id = urllib.request.urlopen(req).read().decode()
-#       service_account = os.environ['SERVICE_ACCOUNT']
-#       credentials = ee.ServiceAccountCredentials(service_account, 'eeKey.json')
-#       ee.Initialize(credentials=credentials, project=project_id)
-
       scopes = ["https://www.googleapis.com/auth/earthengine"]
       credentials = compute_engine.Credentials(scopes=scopes)
       ee.Initialize(credentials)
