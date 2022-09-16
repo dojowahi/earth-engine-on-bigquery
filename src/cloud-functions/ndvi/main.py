@@ -42,7 +42,7 @@ def farm_ndvi_calc(farm_aoi,year,month):
   startDate = first_date.strftime("%Y-%m-%d")
   last_date = datetime(year, month + 1, 1) + timedelta(days=-1)
   endDate = last_date.strftime("%Y-%m-%d")
-  landsat8 = ee.ImageCollection("LANDSAT/LC08/C01/T1_RT")
+  landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1")
   filtered = landsat8.filter(ee.Filter.date(startDate, endDate))
   composite = ee.Algorithms.Landsat.simpleComposite(filtered)
   ndviImage = composite.normalizedDifference(['B5', 'B4']).rename('NDVI')
