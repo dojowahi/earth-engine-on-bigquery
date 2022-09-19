@@ -28,7 +28,7 @@ If the shell script has executed successfully, you should now have a new Service
 <br/><br/>
 You will also see a sample query output on the Cloud shell, as shown below
 <br/><br/>
-![BQ output](/img/deployed_output.png)
+![BQ output](/img/deploy.png)
 
 **4)** A Service Account(SA) in format <Project_Number-compute@developer.gserviceaccount.com> was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
 <br/><br/>
@@ -38,7 +38,7 @@ bq query --use_legacy_sql=false 'SELECT name,gee.get_poly_ndvi_month(farm_aoi,20
 ```
 You will see the NDVI and temperature (in Celsius) output on the Cloud shell for different polygons, as shown below
 <br/><br/>
-![NDVI output](/img/output.png)
+![NDVI output](/img/ndvi_out.png)
 
 <br/><br/>
 ## Congrats! You just executed BigQuery SQL over Landsat imagery
