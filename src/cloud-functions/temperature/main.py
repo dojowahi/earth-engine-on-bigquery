@@ -8,19 +8,11 @@ import shapely
 from google.auth import compute_engine
 from shapely import wkt
 
+scopes = ["https://www.googleapis.com/auth/earthengine"]
+credentials = compute_engine.Credentials(scopes=scopes)
+ee.Initialize(credentials)
+
 def get_temp_month(request):
-
-#       url = "http://metadata.google.internal/computeMetadata/v1/project/project-id"
-#       req = urllib.request.Request(url)
-#       req.add_header("Metadata-Flavor", "Google")
-#       project_id = urllib.request.urlopen(req).read().decode()
-#       service_account = os.environ['SERVICE_ACCOUNT']
-#       credentials = ee.ServiceAccountCredentials(service_account, 'eeKey.json')
-#       ee.Initialize(credentials=credentials, project=project_id)
-
-      scopes = ["https://www.googleapis.com/auth/earthengine"]
-      credentials = compute_engine.Credentials(scopes=scopes)
-      ee.Initialize(credentials)
 
       request_json = request.get_json(silent=True)
       print('Req Json',type(request_json))
@@ -50,12 +42,13 @@ def farm_temp_calc(farm_aoi,year,month):
   startDate = first_date.strftime("%Y-%m-%d")
   last_date = datetime(year, month + 1, 1) + timedelta(days=-1)
   endDate = last_date.strftime("%Y-%m-%d")
-  terra = terra = ee.ImageCollection("IDAHO_EPSCOR/TERRACLIMATE")
-  tmaxScaled = terra.filter(ee.Filter.date(startDate, endDate)).mean().select('tmmx').multiply(0.1)
+  dataset = ee.ImageCollection("ECMWF/ERA5_LAND/MONTHLY").filter(ee.Filter.date(startDate, endDate)).select('temperature_2m').first().subtract(273.15)
 
-  tempValue = tmaxScaled.reduceRegion(**{
+
+  tempValue = dataset.reduceRegion(**{
     'geometry': farm_aoi,
     'reducer': ee.Reducer.mean(),
-    'scale': 30
-  }).get('tmmx'); 
+    'scale': 10
+  }).get('temperature_2m')
+  
   return tempValue
