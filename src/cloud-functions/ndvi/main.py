@@ -8,11 +8,12 @@ import shapely
 from google.auth import compute_engine
 from shapely import wkt
 
-def get_ndvi_month(request):
+scopes = ["https://www.googleapis.com/auth/earthengine"]
+credentials = compute_engine.Credentials(scopes=scopes)
+ee.Initialize(credentials)
 
-      scopes = ["https://www.googleapis.com/auth/earthengine"]
-      credentials = compute_engine.Credentials(scopes=scopes)
-      ee.Initialize(credentials)
+
+def get_ndvi_month(request):
 
       request_json = request.get_json(silent=True)
       print('Req Json',type(request_json))
