@@ -2,8 +2,6 @@ import json
 import ee
 from datetime import datetime
 import calendar
-import os
-import urllib.request
 import geojson
 import shapely
 from google.auth import compute_engine
