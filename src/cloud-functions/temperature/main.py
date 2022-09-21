@@ -1,6 +1,7 @@
 import json
 import ee
-from datetime import date, datetime, timedelta
+from datetime import datetime
+import calendar
 import os
 import urllib.request
 import geojson
@@ -38,9 +39,10 @@ def get_temp_month(request):
 
 def farm_temp_calc(farm_aoi,year,month):
   
+  first,last = calendar.monthrange(year, month)
   first_date = datetime(year, month, 1)
   startDate = first_date.strftime("%Y-%m-%d")
-  last_date = datetime(year, month + 1, 1) + timedelta(days=-1)
+  last_date = datetime(year, month, last)
   endDate = last_date.strftime("%Y-%m-%d")
   dataset = ee.ImageCollection("ECMWF/ERA5_LAND/MONTHLY").filter(ee.Filter.date(startDate, endDate)).select('temperature_2m').first().subtract(273.15)
 
