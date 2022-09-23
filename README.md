@@ -34,7 +34,7 @@ You will also see a sample query output on the Cloud shell, as shown below
 <br/><br/>
 **5)** Once signup is complete execute the command below in Cloudshell
 ```console
-bq query --use_legacy_sql=false 'SELECT name,gee.get_poly_ndvi_month(farm_aoi,2020,7) as ndvi_jul, gee.get_poly_temp_month(farm_aoi,2020,7) as temp_jul  FROM `gee.land_coords` LIMIT 10'
+bq query --use_legacy_sql=false 'SELECT name,gee.get_poly_ndvi_month(aoi,2020,7) as ndvi_jul, gee.get_poly_temp_month(aoi,2020,7) as temp_jul  FROM `gee.land_coords` LIMIT 10'
 ```
 You will see the NDVI and temperature (in Celsius) output on the Cloud shell for different polygons, as shown below
 <br/><br/>
