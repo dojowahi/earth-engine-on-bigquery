@@ -135,7 +135,7 @@ bq query --use_legacy_sql=false ${build_sql}
 
 cd ~/earth-engine-on-bigquery/src/data
 
-bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=aoi:STRING,name:STRING ${project_id}:gee.land_coords  ./farm_dim.csv 
+bq load --source_format=CSV --replace=true --skip_leading_rows=1  --schema=aoi:STRING,name:STRING ${project_id}:gee.land_coords  ./land_dim.csv 
 
 sleep 60
 
