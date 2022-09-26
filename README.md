@@ -21,18 +21,29 @@ chmod +x *.sh
 **3)** Next execute the command below
 
 ```console
-sh deploy.sh
+sh setup_sa.sh
+```
+If the shell script has executed successfully, you should now have a new Service Account created, as shown in the image below
+<br/><br/>
+[BQ output](/img/setup_sa.png)
+
+**4)** A Service Account(SA) in format <Project_Number-compute@developer.gserviceaccount.com> was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
+
+
+**5)** Next execute the command below
+
+```console
+sh deploy_cf.sh
 ```
 
-If the shell script has executed successfully, you should now have a new Service Account, a dataset gee and table land_coords under your project in BigQuery along with a functions get_ndvi_month and get_temp_month. 
+If the shell script has executed successfully,have a dataset gee and table land_coords under your project in BigQuery along with a functions get_poly_ndvi_month and get_poly_temp_month. 
 <br/><br/>
 You will also see a sample query output on the Cloud shell, as shown below
 <br/><br/>
-![BQ output](/img/deploy.png)
+![BQ output](/img/deploy_cf.png)
 
-**4)** A Service Account(SA) in format <Project_Number-compute@developer.gserviceaccount.com> was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
-<br/><br/>
-**5)** Once signup is complete execute the command below in Cloudshell
+
+**6)** Execute the command below in Cloudshell
 ```console
 bq query --use_legacy_sql=false 'SELECT name,gee.get_poly_ndvi_month(aoi,2020,7) as ndvi_jul, gee.get_poly_temp_month(aoi,2020,7) as temp_jul  FROM `gee.land_coords` LIMIT 10'
 ```
