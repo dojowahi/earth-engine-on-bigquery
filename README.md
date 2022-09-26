@@ -27,7 +27,9 @@ If the shell script has executed successfully, you should now have a new Service
 <br/><br/>
 ![Setup output](/img/setup_sa.png)
 
-**4)** A Service Account(SA) in format <Project_Number-compute@developer.gserviceaccount.com> was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name
+**4)** A Service Account(SA) in format <Project_Number-compute@developer.gserviceaccount.com> was created in previous step, you need to signup this SA for Earth Engine at [EE SA signup](https://signup.earthengine.google.com/#!/service_accounts). Check out the last line of the screenshot above it will list out SA name. On successful signup, you screen should look like the one below.
+
+![Signup SA](/img/signup_sa.png)
 
 
 **5)** Next execute the command below
