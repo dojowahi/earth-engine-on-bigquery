@@ -1,6 +1,6 @@
 ##################################################
 ##
-## Create and Configure GCP project for dekart
+## Create and Configure GCP project for EE+BQ
 ##
 ##################################################
 
