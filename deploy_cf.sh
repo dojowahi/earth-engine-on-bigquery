@@ -12,13 +12,39 @@ source ./config.sh
 project_id=${PROJECT_ID}
 cf_ndvi="polyndvicf-gen2"
 cf_temp="polytempcf-gen2"
+cf_dynamic="dynamic_gen2"
+cf_crop="polycrop_gen2"
+cf_fire="polyfire_gen2"
+
+echo "Deploying NDVI CF"
+
 cd ~/earth-engine-on-bigquery/src/cloud-functions/ndvi
 
 gcloud functions deploy ${cf_ndvi} --entry-point get_ndvi_month --runtime python39 --trigger-http --allow-unauthenticated --set-env-vars SERVICE_ACCOUNT=${ee_sa} --project ${project_id} --service-account ${ee_sa} --gen2 --region ${REGION} --run-service-account ${ee_sa} --memory 256MB
 
+echo "Deploying Temperature CF"
+
 cd ~/earth-engine-on-bigquery/src/cloud-functions/temperature
 
 gcloud functions deploy ${cf_temp} --entry-point get_temp_month --runtime python39 --trigger-http --allow-unauthenticated --set-env-vars SERVICE_ACCOUNT=${ee_sa} --project ${project_id} --service-account ${ee_sa} --gen2 --region ${REGION} --run-service-account ${ee_sa} --memory 256MB
+
+echo "Deploying Dynamic World CF"
+
+cd ~/earth-engine-on-bigquery/src/cloud-functions/dynamic_world
+
+gcloud functions deploy ${cf_dynamic} --entry-point get_area --runtime python39 --trigger-http --allow-unauthenticated --set-env-vars SERVICE_ACCOUNT=${ee_sa} --project ${project_id} --service-account ${ee_sa} --gen2 --region ${REGION} --run-service-account ${ee_sa} --memory 256MB
+
+echo "Deploying Crop CF"
+
+cd ~/earth-engine-on-bigquery/src/cloud-functions/crop
+
+gcloud functions deploy ${cf_crop} --entry-point get_crop --runtime python39 --trigger-http --allow-unauthenticated --set-env-vars SERVICE_ACCOUNT=${ee_sa} --project ${project_id} --service-account ${ee_sa} --gen2 --region ${REGION} --run-service-account ${ee_sa} --memory 256MB
+
+echo "Deploying Fire CF"
+
+cd ~/earth-engine-on-bigquery/src/cloud-functions/fire_state
+
+gcloud functions deploy ${cf_fire} --entry-point get_fire_polygon --runtime python39 --trigger-http --allow-unauthenticated --set-env-vars SERVICE_ACCOUNT=${ee_sa} --project ${project_id} --service-account ${ee_sa} --gen2 --region ${REGION} --run-service-account ${ee_sa} --memory 256MB
 
 #Add Cloud Invoker function role
 
@@ -26,6 +52,9 @@ gcloud functions deploy ${cf_temp} --entry-point get_temp_month --runtime python
 
 endpoint_ndvi=$(gcloud functions describe ${cf_ndvi} --region=${REGION} --gen2 --format=json | jq -r '.serviceConfig.uri')
 endpoint_temp=$(gcloud functions describe ${cf_temp} --region=${REGION} --gen2 --format=json | jq -r '.serviceConfig.uri')
+endpoint_dynamic=$(gcloud functions describe ${cf_dynamic} --region=${REGION} --gen2 --format=json | jq -r '.serviceConfig.uri')
+endpoint_crop=$(gcloud functions describe ${cf_crop} --region=${REGION} --gen2 --format=json | jq -r '.serviceConfig.uri')
+endpoint_fire=$(gcloud functions describe ${cf_fire} --region=${REGION} --gen2 --format=json | jq -r '.serviceConfig.uri')
 
 
 bq mk -d gee
@@ -39,6 +68,22 @@ build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_ndvi_month(aoi STRING, year i
 bq query --use_legacy_sql=false ${build_sql}
 
 build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_temp_month(aoi STRING, year int64, month int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_temp}')"
+
+    
+bq query --use_legacy_sql=false ${build_sql}
+
+build_sql="CREATE OR REPLACE FUNCTION gee.get_dw_area(poly_aoi STRING, start_dt STRING, end_dt STRING, area_typr int64) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_dynamic}')"
+
+    
+bq query --use_legacy_sql=false ${build_sql}
+
+build_sql="CREATE OR REPLACE FUNCTION gee.get_fire_polygon_state(start_dt STRING, end_dt STRING, state STRING) RETURNS STRING REMOTE WITH CONNECTION \`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_fire}')"
+
+    
+bq query --use_legacy_sql=false ${build_sql}
+
+build_sql="CREATE OR REPLACE FUNCTION gee.get_poly_crop(farm_aoi STRING, year int64) RETURNS STRING REMOTE WITH CONNECTION
+\`${project_id}.us.gcf-ee-conn\` OPTIONS ( endpoint = '${endpoint_crop}')"
 
     
 bq query --use_legacy_sql=false ${build_sql}
