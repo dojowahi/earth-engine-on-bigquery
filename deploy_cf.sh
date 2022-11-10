@@ -12,9 +12,9 @@ source ./config.sh
 project_id=${PROJECT_ID}
 cf_ndvi="polyndvicf-gen2"
 cf_temp="polytempcf-gen2"
-cf_dynamic="dynamic_gen2"
-cf_crop="polycrop_gen2"
-cf_fire="polyfire_gen2"
+cf_dynamic="dynamic-gen2"
+cf_crop="polycrop-gen2"
+cf_fire="polyfire-gen2"
 
 echo "Deploying NDVI CF"
 
