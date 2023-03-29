@@ -54,6 +54,5 @@ You will see the NDVI and temperature (in Celsius) output on the Cloud shell for
 ![NDVI output](/img/ndvi_out.png)
 
 Check out the example folder for more complex queries which show EE data being pulled into BQ
-
 <br/><br/>
 ## Congrats! You just executed BigQuery SQL over Landsat imagery
